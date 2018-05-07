@@ -1,0 +1,35 @@
+---
+layout: default
+---
+<div class="page">
+  {%- include header.html -%}
+  {{ content }}
+  {%- include footer.html -%}
+  <aside class="menu sidebar is-info">
+    <div class="logo">
+      <figure class="image is-24x24 programming-code">
+        <img alt="Agile Full Stack Developper" src="{{ '/assets/images/programming-code.svg' | relative_url }}">
+      </figure>
+      <h1 class="title">
+        Adil AJJEMAMI
+      </h1>
+    </div>
+    <ul class="menu-list">
+      {% assign pages = site.pages | sort:"order" %}
+      {%- for pg in pages -%}
+        {%- if pg.title -%}
+          {%- if pg.isActive and page.url == pg.url -%}
+            {% assign active = 'is-active' %}
+            {% else %}
+              {% assign active = '' %}
+          {%- endif -%}
+          <li><a class="{{ active }}" href="{{ pg.url | relative_url }}">
+            {{ pg.title | escape }}
+          </a></li>
+        {%- endif -%}
+      {%- endfor -%}
+      <li><a href="mailto:adilajjemami@protonmail.com">Contact</a></li>
+    </ul>
+  </aside>
+  <script src="{{ '/assets/scripts/main.js' | relative_url }}"></script>
+</div>

@@ -1,0 +1,39 @@
+<header class="header">
+  <nav class="navbar is-info" role="navigation" aria-label="main navigation">
+    <div class="container">
+    <div class="navbar-brand">
+      <a class="navbar-item brand-logo" href="{{ '/' | relative_url }}">
+        <div class="logo">
+          <figure class="image is-48x48 programming-code">
+            <img alt="Agile Full Stack Developper" src="{{ '/assets/images/programming-code.svg' | relative_url }}">
+          </figure>
+          <h1 class="title">
+            Adil AJJEMAMI
+          </h1>
+        </div>
+      </a>
+
+      {% assign pages = site.pages | sort:"order" %}
+      {%- for pg in pages -%}
+        {%- if pg.title -%}
+          {%- if pg.isActive and page.url == pg.url -%}
+            {% assign active = 'is-active' %}
+            {% else %}
+              {% assign active = '' %}
+          {%- endif -%}
+          <a class="navbar-item {{ active }}" href="{{ pg.url | relative_url }}">
+            {{ pg.title | escape }}
+          </a>
+        {%- endif -%}
+      {%- endfor -%}
+      <a class="navbar-item" href="mailto:adilajjemami@protonmail.com">Contact</a>
+
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    </div>
+  </nav>
+</header>

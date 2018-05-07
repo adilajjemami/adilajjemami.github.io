@@ -1,0 +1,186 @@
+---
+layout: project
+title: Microservice Expressjs Typscript Boilerplate
+description: A simple nodejs microservice architecture
+githubLink: https://github.com/adilajjemami/express-typescript-boilerplate
+githubRelease: https://github.com/adilajjemami/express-typescript-boilerplate/archive/v1.0.0.zip
+githubReleaseVersion: v1.0.0
+order: 2
+isActive: true
+seoTitle: Microservice Expressjs Typscript Boilerplate. Adil AJJEMAMI
+seoDescription: A simple nodejs microservice architecture using expressjs and typescript.
+---
+<br>
+[![Build Status](https://travis-ci.org/adilajjemami/express-typescript-boilerplate.svg?branch=master)](https://travis-ci.org/adilajjemami/express-typescript-boilerplate)
+[![codecov](https://codecov.io/gh/adilajjemami/express-typescript-boilerplate/branch/master/graph/badge.svg)](https://codecov.io/gh/adilajjemami/express-typescript-boilerplate)
+
+<br>
+
+# Sommaire
+<br>
+<!-- toc -->
+- [Installation](#installation)
+- [Introduction](#introduction)
+    - [Structure](#project-structure)
+    - [Server](#server)
+- [Scripts NPM](#npm-scripts)
+    - [Code Linting](#code-linting)
+    - [Code Testing](#code-testing)
+    - [Check Security](#check-security)
+    - [Build Project](#build-project)
+    - [Serve Dev](#serve-dev)
+
+<!-- tocstop -->
+
+<br><br>
+# Installation
+<br>
+
+```sh
+git clone https://github.com/adilajjemami/express-typescript-boilerplate.git
+cd express-typescript-boilerplate
+yarn install
+```
+<br>
+> 
+> Long live to [Expressjs](http://expressjs.com/), [Typescript](http://www.typescriptlang.org/) and [Yarn](https://yarnpkg.com/lang/en/)
+
+<br><br>
+# Introduction
+<br>
+
+Like most starter-kits and boilerplate projects, this project has a simple philosophy in other words : *Be simple !*
+
+<br><br>
+## Project Structure
+<br>
+
+```
+project 
+│
+└───src
+│   │   Server.ts
+│   │   index.ts
+│   │
+│   └───Controller
+│   |   │   BaseController.ts // Abstr  ct controller
+│   |   │   HelloController.ts // Controller example
+|   |
+│   └───Core
+│   |   │   Core.ts // Application Core
+│   |   │   DependencyInjection.ts // Injection / import utility
+|   |
+│   └───Middlewares
+│   |   │   ErrorMiddleware.ts // Expressjs middleware that return json response when an exception is thrown
+|   |
+│   └───Services
+│   |   │   FakeService.ts // Service example
+│   |   │   HelloService.ts // Service example
+|   |
+│   └───Utils
+│   |   │   ApiError.ts // Custom Error class
+│   |   │   GlobalMessage.ts // Get error object based on an errorCode
+|   |   
+│   └───config
+│       │   config.ts // Global/shared configuration
+│       │   configDev.ts // Development configuration. NODE_ENV=dev
+│       │   configDev.ts // Production configuration. NODE_ENV=prod
+│       │   configTest.ts // Production configuration. NODE_ENV=test
+│       │   middlewares.ts // Middlewares configuration
+│       │   parameters.ts // Application parameters
+│       │   routing.ts // Apllication routing
+│       │   services.ts // Services configuration
+│   
+└───Resources
+|   │   errors.json // Global error messages
+|
+└───test // Unitests
+└───dist // Dist files
+```
+
+<br><br>
+## Server
+<br>
+
+```ts
+import http from 'http';
+import { Server } from './Server';
+
+Server.boostrap()
+    .then((server) => {
+        // Create server
+        const httpServer = http.createServer(app);
+
+        // Start listening on port 3000
+        // You can override port by using NODE_PORT=8080
+        httpServer.listen(server.getPort());
+    });
+```
+<br>
+If you prefer **async**/**await**:
+<br><br>
+
+```ts
+import http from 'http';
+import { Server } from './Server';
+
+...
+
+const server = await Server.bootstrap();
+
+// Create server
+const httpServer = http.createServer(app);
+
+// Start listening on port 3000
+// You can override port by using NODE_PORT=8080
+httpServer.listen(server.getPort());
+```
+
+<br><br>
+## NPM Scripts
+<br>
+
+## Code Linting
+<br>
+
+To lint the source code (tsLint):
+<br>
+```sh
+npm run lint
+```
+
+<br><br>
+## Code Testing
+<br>
+To test the source code (mocha/chai):
+<br>
+```sh
+npm run test
+```
+
+<br><br>
+## Check Security
+<br>
+To dependencies check security issues (retirejs):
+<br>
+```sh
+npm run security-checker
+```
+
+<br><br>
+## Build Project
+<br>
+To build the project:
+<br>
+```sh
+npm run build
+```
+
+<br><br>
+## Serve Dev
+<br>
+You can run the server (dev):
+<br>
+```sh
+npm run serve-dev
+```

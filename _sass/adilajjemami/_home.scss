@@ -1,0 +1,47 @@
+section.home {
+  & figure {
+    margin: auto;
+  }
+
+  & .avatar {
+    border-radius: 50%;
+  }
+
+  & .logo {
+    margin: 5px auto;
+    text-align: center;
+
+    & .programming-code, & .title {
+      display: inline-block;
+      margin: 0 5px;
+    }
+
+    & .title {
+      position: relative;
+      top: -10px;
+    }
+
+    & .title:after {
+      content: '';
+      display: block;
+      clear: both;
+    }
+  }
+
+  & .title, & .subtitle, & figure {
+    text-align: center;
+  }
+
+  & header, & footer {
+    text-align: center;
+  }
+
+  & header .navbar-item, & footer .navbar-item {
+    display: inline-block;
+    text-align: center;
+  }
+
+  & header .navbar-item {
+    font-size: 1.2em;
+  }
+}

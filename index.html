@@ -1,0 +1,36 @@
+---
+# Feel free to add content and custom Front Matter to this file.
+# To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
+
+layout: home
+permalink: /
+order: 1
+seoTitle: "Adil AJJEMAMI"
+seoDescription: Adil AJJEMAMI. AGILE Full Stack Developer.
+seoKeywords: adil ajjemami, agile, full stack, developper, developpeur, php, laravel, symfony, silex, slim, couchbase, node, nodejs, express, expressjs, typescript, microservice, angular, angularjs, socket.io, html5, css3, webpack, gulp, grunt, docker, docker-compose, jenkins, continuous integration, continuous deployment, git, github, gitlab, bitbucket
+---
+{% assign pages = site.pages | sort:"order" %}
+<header class="header">
+  {%- for page in pages -%}
+    {%- if page.title -%}
+      {%- if page.title != 'Accueil' -%}
+          <a class="navbar-item" href="{{ page.url | relative_url }}">
+            {{ page.title | escape }}
+          </a>
+      {%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+  <a class="navbar-item" href="mailto:adilajjemami@protonmail.com">Contact</a>
+</header>
+<footer>
+  <a class="navbar-item" href="https://github.com/adilajjemami">
+    <span class="icon">
+      <i class="fa fa-2x fa-github"></i>
+    </span>
+  </a>
+  <a class="navbar-item" href="https://twitter.com/adil_ajjemami">
+    <span class="icon">
+      <i class="fa fa-2x fa-twitter"></i>
+    </span>
+  </a>
+</footer>

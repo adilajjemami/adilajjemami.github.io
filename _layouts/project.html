@@ -1,0 +1,34 @@
+---
+layout: page
+---
+<section class="hero is-medium is-info">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        {{ page.title }}
+      </h1>
+      <h2 class="subtitle">
+         {{ page.description }}
+      </h2>
+    </div>
+  </div>
+  <div class="hero-foot">
+    <div class="container">
+      <a target="_blank" href="{{ page.githubLink }}" class="button is-medium">
+        <span class="icon is-medium">
+          <i class="fa fa-github"></i>
+        </span>
+        <span>GitHub</span>
+      </a>
+      <a target="_blank" href="{{ page.githubRelease }}" class="button is-medium">
+        <span class="icon is-medium">
+          <i class="fa fa-download"></i>
+        </span>
+        <span>Release {{ page.githubReleaseVersion }}</span>
+      </a>
+    </div>
+  </div>
+</section>
+<section class="container content-container">
+  {{ content }}
+</section>
