@@ -1,0 +1,192 @@
+---
+layout: project
+title: Microservice Expressjs Typscript Boilerplate
+description: A simple nodejs microservice architecture
+githubLink: https://github.com/adilajjemami/express-typescript-boilerplate
+githubRelease: https://github.com/adilajjemami/express-typescript-boilerplate/archive/v1.0.0.zip
+githubReleaseVersion: v1.0.0
+order: 2
+isActive: true
+seoTitle: Microservice Expressjs Typscript Boilerplate. Adil AJJEMAMI
+seoDescription: A simple nodejs microservice architecture using expressjs and typescript.
+---
+
+<br>
+<div class="pull-right">
+<a class="badge" target="_blank" href="https://travis-ci.org/adilajjemami/express-typescript-boilerplate">
+  <figure class="image travis">
+    <img src="https://travis-ci.org/adilajjemami/express-typescript-boilerplate.svg?branch=master">
+  </figure>
+</a>
+<a class="badge" target="_blank" href="https://codecov.io/gh/adilajjemami/express-typescript-boilerplate">
+  <figure class="image codecov">
+    <img src="https://codecov.io/gh/adilajjemami/express-typescript-boilerplate/branch/master/graph/badge.svg">
+  </figure>
+</a>
+</div>
+
+<div class="content wiki">
+  <h1>Sommaire</h1>
+  <ul>
+    <li><a href="#installation">Installation</a></li>
+    <li>
+      <a href="#introduction">Introduction</a>
+      <ul>
+        <li><a href="#project-structure">Structure du projet</a></li>
+        <li><a href="#server">Serveur</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#npm-scripts">Scripts NPM</a>
+      <ul>
+        <li><a href="#code-linting">Code linting</a></li>
+        <li><a href="#code-testing">Code testing</a></li>
+        <li><a href="#check-security">Vérifier la sécuriter des packages</a></li>
+        <li><a href="#build-project">Builder le projet (compiler)</a></li>
+        <li><a href="#serve-dev">Server la version de dev</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <h1 id="installation">Installation</h1>
+  <pre class="prettyprint">
+    <code>
+      git clone https://github.com/adilajjemami/express-typescript-boilerplate.git
+      cd express-typescript-boilerplate
+      yarn install
+    </code>
+  </pre>
+  <p>
+    <cite>
+       Long vie à 
+       <a href="http://expressjs.com/">Expressjs</a>, 
+       <a href="http://www.typescriptlang.org/">Typescript</a> et 
+       <a href="https://yarnpkg.com/lang/en/">Yarn</a>.
+    </cite>
+  </p>
+
+  <h1 id="introduction">Introduction</h1>
+  <p>
+    Comme la plus part des starter-kits, ce projet a un seul mot d'ordre : <strong>Simplicité</strong>
+  </p>
+
+  <h2 id="project-structure">Structure du project</h2>
+  <pre class="prettyprint">
+    <code>
+      Projet/ 
+      │
+      └───src/
+      │   │   Server.ts
+      │   │   index.ts
+      │   │
+      │   └───Controller/
+      │   |   │   BaseController.ts // Controlleur abstrait (parent)
+      │   |   │   HelloController.ts // Ex Controlleur
+      |   |
+      │   └───Core/
+      │   |   │   Core.ts // Application Core
+      │   |   │   DependencyInjection.ts // Injection de dependence et utilité d'importation
+      |   |
+      │   └───Middlewares/
+      │   |   │   ErrorMiddleware.ts // Middleware expressjs retournant du json si exception il y a
+      |   |
+      │   └───Services/
+      │   |   │   FakeService.ts // Ex service
+      │   |   │   HelloService.ts // Ex service
+      |   |
+      │   └───Utils/
+      │   |   │   ApiError.ts // Classe d'erreur pérsonalisée
+      │   |   │   GlobalMessage.ts // Get error object based on an errorCode
+      |   |   
+      │   └───config/
+      │       │   config.ts // Configuration globale
+      │       │   configDev.ts // Configuration dev. NODE_ENV=dev
+      │       │   configProd.ts // Configuration prod. NODE_ENV=prod
+      │       │   configTest.ts // Configuration test. NODE_ENV=test
+      │       │   middlewares.ts // Configuration des middlewares
+      │       │   parameters.ts // Application parameters
+      │       │   routing.ts // Routing de l'application
+      │       │   services.ts // Configuration des services
+      │   
+      └───Resources/
+      |   │   errors.json // Message d'erreur global
+      |
+      └───test // Unitests
+      └───dist // Fichiers dist
+    </code>
+  </pre>
+
+  <h2 id="server">Serveur</h2>
+  <pre class="prettyprint">
+    <code>
+      import http from 'http';
+      import { Server } from './Server';
+
+      Server.boostrap()
+          .then((server) => {
+              // Créer un serveur
+              const httpServer = http.createServer(app);
+
+              // Ecouter sur le port 3000
+              // Vous pouvez changer le port avec la variable env NODE_PORT=8080
+              httpServer.listen(server.getPort());
+          });
+    </code>
+  </pre>
+  <p>
+    Si vous préferez <strong>async / await</strong>
+  </p>
+  <pre class="prettyprint">
+    <code>
+      import http from 'http';
+      import { Server } from './Server';
+
+      ...
+
+      const server = await Server.bootstrap();
+
+      // Create server
+      const httpServer = http.createServer(app);
+
+      // Start listening on port 3000
+      // You can override port by using NODE_PORT=8080
+      httpServer.listen(server.getPort());
+    </code>
+  </pre>
+
+  <h1 id="npm-scripts">Scripts NPM</h1>
+  <h2 id="code-linting">Code linting</h2>
+  <pre class="prettyprint">
+    <code>
+       npm run lint
+    </code>
+  </pre>
+
+  <h2 id="code-testing">Code testing</h2>
+  <pre class="prettyprint">
+    <code>
+       npm run test
+    </code>
+  </pre>
+
+  <h2 id="check-security">Vérifier la sécuriter des packages</h2>
+  <pre class="prettyprint">
+    <code>
+       npm run security-checker
+    </code>
+  </pre>
+
+  <h2 id="build-project">Builder le projet (compiler)</h2>
+  <pre class="prettyprint">
+    <code>
+       npm run build
+    </code>
+  </pre>
+
+  <h2 id="serve-dev">Server la version de dev</h2>
+  <pre class="prettyprint">
+    <code>
+       npm run serve-dev
+    </code>
+  </pre>
+</div>

@@ -1,4 +1,32 @@
 .page {
+  & a.badge {
+    & figure {
+      display: inline-block;
+
+      &.github {
+        height: 20px;
+      }
+
+      &.travis {
+        width: 90px;
+      }
+
+      &.codeclimate {
+        width: 144px;
+      }
+
+      &.codecov {
+        width: 96px;
+      }
+    }
+  }
+
+  // & .content ul {
+  //     list-style: disc outside;
+  //     margin-left: 2em;
+  //     margin-top: 1em;
+  // }
+
   & header {
     & .logo {
       margin: 5px auto;
@@ -57,8 +85,10 @@
   }
 
   & .content-container {
-    & pre.highlight {
-      padding: 10px 16px;
+    &.wiki {
+      & h2 {
+        margin-top: 0;
+      }
     }
   }
 
@@ -124,7 +154,7 @@
   }
 
   & footer.footer {
-    margin-top: 10px;
+    margin-top: 48px;
     padding: 15px 0;
 
     & a {

@@ -10,4 +10,250 @@ isActive: true
 seoTitle: PHP Couchbase Driver. Adil AJJEMAMI
 seoDescription: A simple php couchbase driver.
 ---
-couchbase
+<br>
+<div class="pull-right">
+<a class="badge" target="_blank" href="https://github.com/adilajjemami/couchbase-driver">
+  <figure class="image github">
+    <img src="https://img.shields.io/badge/Badges-Couchbase%20Driver-brightgreen.svg">
+  </figure>
+</a>
+<a class="badge" target="_blank" href="https://travis-ci.org/adilajjemami/couchbase-driver">
+  <figure class="image travis">
+    <img src="https://travis-ci.org/adilajjemami/couchbase-driver.svg?branch=master">
+  </figure>
+</a>
+<a class="badge" target="_blank" href="https://codeclimate.com/github/adilajjemami/couchbase-driver/maintainability">
+  <figure class="image codeclimate">
+    <img src="https://api.codeclimate.com/v1/badges/ac0f1353d1599149db90/maintainability">
+  </figure>
+</a>
+<a class="badge" target="_blank" href="https://codecov.io/gh/adilajjemami/couchbase-driver">
+  <figure class="image codecov">
+    <img src="https://codecov.io/gh/adilajjemami/couchbase-driver/branch/master/graph/badge.svg">
+  </figure>
+</a>
+</div>
+
+<div class="content wiki">
+  <h1>Sommaire</h1>
+  <ul>
+    <li><a href="#installation">Installation</a></li>
+    <li><a href="#introduction">Introduction</a></li>
+    <li>
+      <a href="#utilisation">Utilisation</a>
+      <ul>
+        <li><a href="#instanciate-cluster">Instancier un cluster</a></li>
+        <li><a href="#open-bucket">Ouvrir un bucket</a></li>
+        <li><a href="#instanciate-collection">Instantier une collection</a></li>
+        <li>
+          <a href="#requests">Requêtes</a>
+          <ul>
+            <li><a href="#find">Find</a></li>
+            <li>
+              <a href="#select">Select</a>
+              <ul>
+                <li><a href="#first">First</a></li>
+                <li><a href="#all">All</a></li>
+                <li><a href="#where-conditions">Where conditions</a></li>
+                <li><a href="#request-params">Request params</a></li>
+                <li><a href="#order-by">Order by</a></li>
+                <li><a href="#limit">Limit</a></li>
+                <li><a href="#offset">Offset</a></li>
+              </ul>
+            </li>
+            <li><a href="#insert">Insert</a></li>
+            <li><a href="#upsert">Upsert</a></li>
+            <li><a href="#delete">Delete</a></li>
+            <li><a href="#raw-request">Raw request</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+  
+  <h1 id="installation">Installation</h1>
+  <p>Vous pouvez cloner le projet ou le telecharger (zip).</p>
+  <p>Clode :</p>
+  <pre class="prettyprint">
+    <code>
+      git clone https://github.com/adilajjemami/couchbase-driver.git
+      cd couchbase-driver
+      composer install
+    </code>
+  </pre>
+  <h1 id="introduction">Introduction</h1>
+  <p>
+    Ce projet a pour but de simplier l'utilisation du SDK PHP de <a href="https://www.couchbase.com">Couchbase</a>
+  </p>
+
+  <h1 id="utilisation">Utilisation</h1>
+
+  <h2 id="instantiace-cluster">Instancier un cluster</h2>
+  <pre class="prettyprint">
+    <code>
+      $cluster = new \AdilAJJEMAMI\Cluster();
+      $n1qlQuery = new \AdilAJJEMAMI\N1qlQuery();
+      $cluster->init('http://COUCHBASE_CLUSTER_URL', $n1qlQuery);
+    </code>
+  </pre>
+
+  <h2 id="open-bucket">Ouvrir un bucket</h2>
+  <pre class="prettyprint">
+    <code>
+      $bucket = new \AdilAJJEMAMI\Bucket('bucket_name', $cluster);
+      $bucket->open();
+    </code>
+  </pre>
+
+  <h2 id="instanciate-collection">Instancier une collection</h2>
+  <pre class="prettyprint">
+    <code>
+      $collection = new \AdilAJJEMAMI\Collection('collection_name', $bucket);
+    </code>
+  </pre>
+
+  <h2 id="requests">Requêtes</h2>
+  <p>Tout d'abord il faut instancier notre cluster, ouvrir un bucket et un collection:</p>
+  <pre class="prettyprint">
+    <code>
+      // Instancier un cluster
+      $cluster = new \AdilAJJEMAMI\Cluster();
+      $n1qlQuery = new \AdilAJJEMAMI\N1qlQuery();
+      $cluster->init('http://COUCHBASE_CLUSTER_URL', $n1qlQuery);
+
+      // Ouvrir un bucket
+      $bucket = new \AdilAJJEMAMI\Bucket('bucket_name', $cluster);
+      $bucket->open();
+
+      // Instantier une collection
+      $collection = new \AdilAJJEMAMI\Collection('collection_name', $bucket);
+    </code>
+  </pre>
+
+  <h3 id="find">Find</h3>
+  <p>Trouver un objet via son identifiant</p>
+  <pre class="prettyprint">
+    <code>
+      $result = $collection->find('objectId');
+      var_dump($result);
+    </code>
+  </pre>
+
+  <h3 id="select">Select</h3>
+  <p>Faire une selection sur une collection</p>
+  <pre class="prettyprint">
+    <code>
+      $result = $collection->select(['attr1', 'attr2'])
+                          ->get();
+      var_dump($result);
+    </code>
+  </pre>
+
+  <h4 id="first">First</h4>
+  <p>Selectionner le premier objet</p>
+  <pre class="prettyprint">
+    <code>
+      $result = $collection->select(['attr1', 'attr2'])
+                          ->first();
+      var_dump($result);
+    </code>
+  </pre>
+
+  <h4 id="all">All</h4>
+  <p>Selectionner tous objets</p>
+  <pre class="prettyprint">
+    <code>
+      $result = $collection->select(['attr1', 'attr2'])
+                          ->all();
+      var_dump($result);
+    </code>
+  </pre>
+
+  <h4 id="where-conditions">Where conditions</h4>
+  <p>Faire des conditions where</p>
+  <pre class="prettyprint">
+    <code>
+      $result = $collection->select(['attr1', 'attr2'])
+                          ->where('attr1', '=', 'value')
+                          ->where('attr2', '>', 100);
+                          ->get();
+      var_dump($result);
+    </code>
+  </pre>
+
+  <h4 id="request-params">Request params</h4>
+  <p>Passer des paramètres à la requête</p>
+  <pre class="prettyprint">
+    <code>
+      $result = $collection->select(['attr1', 'attr2'])
+                          ->where('attr1', '=', '$attr1')
+                          ->where('attr2', '>', '$attr2')
+                          ->params([
+                            '$attr1' => 'value',
+                            '$attr2' => 100
+                          ])
+                          ->get();
+      var_dump($result);
+    </code>
+  </pre>
+
+  <h4 id="order-by">Order by</h4>
+  <p>Trier le résultat. ASC: Ordre croissant. DESC: Ordre décroissant. Par défaut, l'odre est croissant</p>
+  <pre class="prettyprint">
+    <code>
+      $result = $collection->select(['attr1', 'attr2', 'attr3'])
+                          ->where('attr1', '=', '$attr1')
+                          ->where('attr2', '>', '$attr2')
+                          ->orderBy('attr3', 'DESC')
+                          ->get();
+      var_dump($result);
+    </code>
+  </pre>
+
+  <h4 id="limit">Limit</h4>
+  <p>Limiter le résultat</p>
+  <pre class="prettyprint">
+    <code>
+      // Limiter à 10.
+      $result = $collection->select(['attr1', 'attr2', 'attr3'])
+                          ->limit(10)
+                          ->get();
+      var_dump($result);
+    </code>
+  </pre>
+
+  <h4 id="offset">Offset</h4>
+  <p>Combiner avec limit(), cette methode permet de créer un pagination.</p>
+  <pre class="prettyprint">
+    <code>
+      $result = $collection->select(['attr1', 'attr2', 'attr3'])
+                          ->limit(10)
+                          ->offset(150)
+                          ->get();
+      var_dump($result);
+    </code>
+  </pre>
+
+  <h3 id="insert">Insert</h3>
+  <p>Inserer un objet.</p>
+  <pre class="prettyprint">
+    <code>
+      $newObject1 = $collection->insert([
+        'id' => 1,
+        'attr1' => 'value',
+      ]);
+
+      // Vous pouvez passer des options couchbase.
+      $newObject2 = $collection->insert(
+        [
+          'id' => 1,
+          'attr1' => 'value',
+        ],
+        [
+          'expiry' => // timestamp,
+          ....
+        ]
+      );
+    </code>
+  </pre>
+</div>
